@@ -1,0 +1,1133 @@
+===================================================================================================================
+Prining  the input
+===================================================================================================================
+package pack1
+
+object obj {
+  def main(args: Array[String]): Unit = {
+    println("=============== started ===============")
+    val a = 2
+    println(a)
+    val b = "zeyo"
+    println(b)
+    
+  }
+}
+===================================================================================================================
+Printing  the input
+===================================================================================================================
+package pack1
+
+object obj {
+  def main(args: Array[String]): Unit = {
+    println("=============== started ===============")
+    val a = 2
+    println(a)
+    val b = "zeyo"
+    println(b)
+    val lis = List(1, 2, 3, 4)
+    println(lis)
+    
+  }
+}
+===================================================================================================================
+Printing the input
+===================================================================================================================
+package pack1
+
+object obj {
+  def main(args: Array[String]): Unit = {
+    println("=============== started ===============")
+    val a = 2
+    println(a)
+    val b = "zeyo"
+    println(b)
+    val lis = List(1, 2, 3, 4)
+    println(lis)
+    println("====== raw list ===============")
+    lis.foreach(println)    
+  }
+}
+===================================================================================================================
+Filter operations x => x > 2 filtering greater than values
+===================================================================================================================
+ pack1
+
+object obj {
+  def main(args: Array[String]): Unit = {
+    println("=============== started ===============")
+    val a = 2
+    println(a)
+    val b = "zeyo"
+    println(b)
+    val lis = List(1, 2, 3, 4)
+    println(lis)
+    println("====== raw list ===============")
+    lis.foreach(println)
+    val plis = lis.filter(x => x > 2)
+    println("====== processed list ===============")
+    plis.foreach(println)
+  }
+}
+2
+zeyo
+List(1, 2, 3, 4)
+====== raw list ===============
+1
+2
+3
+4
+====== processed list ===============
+3
+4
+
+===================================================================================================================
+
+import org.apache.spark.SparkContext //rdd
+import org.apache.spark.sql.SparkSession // dataframe
+import org.apache.spark.SparkConf
+===================================================================================================================
+package spark pack
+
+import org.apache.spark._
+import sys.process._
+
+
+
+object sparkobj {
+
+
+	def main(args:Array[String]):Unit={
+
+	  
+	    val conf = new SparkConf().setAppName("first").setMaster("local[*]")
+	    val sc = new SparkContext(conf)
+	    sc.setLogLevel("ERROR")
+	    
+
+			val data = sc.textFile("file:///home/itv004875/data/txns")
+					val gymdata= data.filter(x=>x.contains("Gymnastics"))
+					"hadoop fs -rmr /user/itv004875/spark/datagym".!
+					gymdata.saveAsTextFile("/user/itv004875/spark/datagym")
+					println("==============done =================")
+
+	}
+}
+===================================================================================================================
+SPARK_SHELL:
+ spark-submit --class sparkpack.sparkobj SparkFirst-0.0.1-SNAPSHOT.jar
+=================================================================================================================== 
+ MaP operations- x => x*2 Multiplication
+ ===================================================================================================================
+ object obj2 {
+   def main(args:Array[String]): Unit ={
+    println("==========OPERATION STARTED================")
+    val list = List(1,2,3,4)
+    println(list)
+    println("==========RAW LIST========================")
+    list.foreach(println)
+    val plist = list.map(x => x*2)
+    println("==========PROCESSED LIST=================")
+    plist.foreach(println)
+    
+}
+}
+==========OPERATION STARTED================
+List(1, 2, 3, 4)
+==========RAW LIST========================
+1
+2
+3
+4
+==========PROCESSED LIST=================
+2
+4
+6
+8
+
+===================================================================================================================
+Map operations-(Dividing the values and printing with out decimals)
+===================================================================================================================
+package pack1
+
+object obj3 {
+  def main(args:Array[String]): Unit ={
+    println("==========OPERATION STARTED================")
+    val list = List(1,2,3,4)
+    println(list)
+    println("==========RAW LIST========================")
+    list.foreach(println)
+    val plist = list.map(x => x/2)
+    println("==========PROCESSED LIST=================")
+    plist.foreach(println)
+    
+}
+}
+==========OPERATION STARTED================
+List(1, 2, 3, 4)
+==========RAW LIST========================
+1
+2
+3
+4
+==========PROCESSED LIST=================
+0
+1
+1
+2
+===================================================================================================================
+Map operations-(Dividing the values and printing with decimals)
+===================================================================================================================
+package pack1
+
+object obj4 {
+  def main(args:Array[String]): Unit ={
+    println("==========OPERATION STARTED================")
+    val list = List(1,2,3,4)
+    println(list)
+    println("==========RAW LIST========================")
+    list.foreach(println)
+    val plist = list.map(x => x.toDouble/2)
+    println("==========PROCESSED LIST=================")
+    plist.foreach(println)
+    
+  }
+}
+
+x.toDouble/2 (which divides the element by 2 and converts it to a Double,
+a double is a data type that is used to represent a decimal number)
+==========OPERATION STARTED================
+List(1, 2, 3, 4)
+==========RAW LIST========================
+1
+2
+3
+4
+==========PROCESSED LIST=================
+0.5
+1.0
+1.5
+2.0
+
+====================================================================================================================
+Filtering x=> contains( word that matches may not be excat)
+====================================================================================================================
+package pack1
+object obj5 {
+  def main(args:Array[String]): Unit ={
+   println("===============INPUT==============")
+   val list = List("Zeyobron","analytics","Zeyo")
+   list.foreach(println)
+   val plist = list.filter(x => x.contains("Zeyo"))
+   println("==============FOUND WORDS WITH ZEYO=================")
+   plist.foreach(println)
+  
+
+}
+}
+===============INPUT==============
+Zeyobro
+analytics
+Zeyo
+==============FOUND WORDS WITH ZEYO=================
+Zeyobro
+Zeyo
+===================================================================================================================
+Filtering x=>Equals ( finding the word )
+===================================================================================================================
+package pack1
+object obj6 {
+  def main(args:Array[String]): Unit ={
+   println("===============INPUT==============")
+   val list = List("Zeyobron","analytics","Zeyo")
+   list.foreach(println)
+   val plist = list.filter(x => x.equals("Zeyo"))
+   println("==============FOUND WORDS WITH ZEYO=================")
+   plist.foreach(println)
+  
+
+}
+}
+===============INPUT==============
+Zeyobron
+analytics
+Zeyo
+==============FOUND WORDS WITH ZEYO=================
+Zeyo
+
+===================================================================================================================
+Filter and map operation X.>contains & x.toLowerCase (Filtering word with case sensitive 
+ and  Mapping converting the filtered data to  lower case)
+===================================================================================================================
+package pack1
+object obj7 {
+  def main(args:Array[String]): Unit ={
+   println("===============INPUT==============")
+   val list = List("Zeyobron","analytics","Zeyo")
+   list.foreach(println)
+   val plist = list.filter(x => x.toLowerCase.contains("zeyo"))
+                   .map(x => x.toLowerCase)
+               
+   println("==============FOUND WORDS WITH ZEYO=================")
+   plist.foreach(println)
+  
+
+}
+}
+===============INPUT==============
+Zeyobron
+analytics
+Zeyo
+==============FOUND WORDS WITH ZEYO=================
+zeyobron
+zeyo
+
+===================================================================================================================
+MAp operations - (Concating string zeyo to input data as per code)
+===================================================================================================================
+package pack1
+object obj8 {
+  def main(args:Array[String]): Unit ={
+   println("===============INPUT==============")
+   val list = List("Zeyobron","analytics","Zeyo")
+   list.foreach(println)
+   val plist = list.map(x => x.concat("-zeyo"))
+                   
+               
+   println("==============CONCATE OPERATION=================")
+   plist.foreach(println)
+  
+
+}
+}
+===============INPUT==============
+Zeyobron
+analytics
+Zeyo
+==============CONCATE OPERATION=================
+Zeyobron-zeyo
+analytics-zeyo
+Zeyo-zeyo
+
+===================================================================================================================
+Map operation 
+===================================================================================================================
+package pack1
+object obj9 {
+  def main(args:Array[String]): Unit ={
+   println("===============INPUT==============")
+   val list = List("Zeyobron","Zeyotics","Zeyo")
+   list.foreach(println)
+   val plist = list.map(x => x.replace("Zeyo","tera"))
+                   
+               
+   println("==============CONCATE OPERATION=================")
+   plist.foreach(println)
+ 
+}
+}
+===================================================================================================================
+Map operations -x.replace  Replace opeartions
+===================================================================================================================
+package pack1
+object obj9 {
+  def main(args:Array[String]): Unit ={
+   println("===============INPUT==============")
+   val list = List("Zeyobron","Zeyotics","Zeyo")
+   list.foreach(println)
+   val plist = list.map(x => x.replace("Zeyo","tera")) //replace operation
+                   
+               
+   println("==============CONCATE OPERATION=================")
+   plist.foreach(println)
+  
+
+}
+}
+===============INPUT==============
+Zeyobron
+Zeyotics
+Zeyo
+==============REPLACE OPERATION=================
+terabron
+teratics
+tera
+
+===================================================================================================================
+Flat Map opeartions - x => x.split("~") Spliting the data with delimiter
+===================================================================================================================
+package pack1
+object obj10 {
+  def main(args:Array[String]): Unit ={
+   println("===============INPUT==============")
+   val list = List("A~B","C~D","E~F")
+   list.foreach(println)
+   val plist = list.flatMap(x => x.split("~")) //flaten the element delimiter ~
+                   
+               
+   println("==============FLATEN OPERATION=================")
+   plist.foreach(println)
+  
+
+}
+}
+===============INPUT==============
+A~B
+C~D
+E~F
+==============FLATEN OPERATION=================
+A
+B
+C
+D
+E
+F
+
+===================================================================================================================
+Filter(contains)-flatmap(delimiter)-map(replace)-map(concat)
+(x => x.contains("India"))-(x => x.split("-")-(x => x.replace("India","local"))-(x => x.concat("-i love u "))
+===================================================================================================================
+package pack1
+object obj11 {
+  def main(args:Array[String]): Unit ={
+   println("===============INPUT==============")
+   val list = List("Amazon-jeff-America","microsoft-Billgates-America","TCS-Tata-India","Reliance-ambani-India")
+   list.foreach(println)
+   val flist = list.filter(x => x.contains("India"))
+      println("==============SEARCH OPERATION=================")   
+   flist.foreach(println)
+   val plist = flist.flatMap(x => x.split("-")) //flaten the element delimiter ~
+                 
+  println("==============FLATEN OPERATION=================")
+  plist.foreach(println)
+  val rpl = plist.map(x => x.replace("India","local"))
+      
+  println("==============REPLACE OPERATION=================")
+  rpl.foreach(println)
+  
+  val con = rpl.map(x => x.concat("-i love u "))
+  con.foreach(println)
+}
+}
+===============INPUT==============
+Amazon-jeff-America
+microsoft-Billgates-America
+TCS-Tata-India
+Reliance-ambani-India
+==============SEARCH OPERATION=================
+TCS-Tata-India
+Reliance-ambani-India
+==============FLATEN OPERATION=================
+TCS
+Tata
+India
+Reliance
+ambani
+India
+==============REPLACE OPERATION=================
+TCS
+Tata
+local
+Reliance
+ambani
+local
+==============CONCAT OPERATION=================
+TCS-i love u 
+Tata-i love u 
+local-i love u 
+Reliance-i love u 
+ambani-i love u 
+local-i love u 
+
+===================================================================================================================
+package pack1
+object obj12 {
+  def main(args:Array[String]): Unit ={
+    println("==========================INPUT======================")
+    val list = List("State->Tamilnadu~city->chennai","State->Karnataka~city->Banglore","State->Telangana~city->Hyderabad")
+    println(list)
+        println("==========================STAGE-1======================")
+    list.foreach(println)
+    
+    val state = list.flatMap(x => x.split("~"))
+    println("==========================STAGE-2======================")
+    state.foreach(println)
+    val lstate = state.filter(x => x.contains("State"))
+    println("==========================STAGE-3======================")
+    lstate.foreach(println)
+    val lcity = state.filter(x => x.contains("city"))
+    println("==========================STAGE-4======================")
+    lcity.foreach(println)
+    val llstate = lstate.map(x => x.replace("State->"," "))
+    println("==========================STATE======================")
+    llstate.foreach(println)
+    val llcity = lcity.map(x => x.replace("city->"," "))
+    println("==========================CITY======================")
+    llcity.foreach(println)
+    println("========================== END======================")
+  }
+}
+===================================================================================================================
+package pack2
+
+import org.apache.spark.SparkContext 
+import org.apache.spark.SparkConf
+
+
+object sparkobj {
+  
+  def main(args:Array[String]):Unit={
+
+	  	    val conf = new SparkConf().setAppName("first").setMaster("local[*]")
+	  	    val sc = new SparkContext(conf)
+	  	    sc.setLogLevel("ERROR")
+	  	    
+	  	    val data = sc.textFile("file:///E:/softwares/Dataengineering/Spark/data1")
+	  	    println("===================RAW RDD====================================")
+	  	    data.foreach(println)
+	  	    
+   val state = data.flatMap(x => x.split("~"))
+    println("==========================STAGE-2======================")
+    state.foreach(println)
+    val lstate = state.filter(x => x.contains("State"))
+    println("==========================STAGE-3======================")
+    lstate.foreach(println)
+    val lcity = state.filter(x => x.contains("city"))
+    println("==========================STAGE-4======================")
+    lcity.foreach(println)
+    val llstate = lstate.map(x => x.replace("State->"," "))
+    println("==========================STATE======================")
+    llstate.foreach(println)
+    val llcity = lcity.map(x => x.replace("city->"," "))
+    println("==========================CITY======================")
+    llcity.foreach(println)
+    println("========================== END======================")
+    
+    llstate.coalesce(1).saveAsTextFile("file:///E:/softwares/Dataengineering/Spark/data2")
+    
+}
+}
+===================================================================================================================
+object obj13 {
+  def main(args:Array[String]): Unit ={
+    println("==========================INPUT======================")
+    val list = List("BigData-Spark-Hive","Spark-Hadoop-Hive","Sqoop-Hive-Spark","Sqoop-BD-Hive")
+     println(list)
+        println("==========================STAGE-1======================")
+    list.foreach(println)
+    
+    val state = list.flatMap(x => x.split("-")).distinct
+    println("==========================STAGE-2======================")
+    state.foreach(println)
+    val lstate = state.map(x => x.replace("BD","BigData"))
+    println("==========================STAGE-3======================")
+    lstate.foreach(println)
+    val lcity = state.map(x => ("Tech->")+x.concat("Trainer->Sai"))
+    println("==========================STAGE-4======================")
+    lcity.foreach(println)
+   
+  }
+}
+===================================================================================================================
+
+package pack2
+
+import org.apache.spark.SparkContext 
+import org.apache.spark.SparkConf
+object sparkobj1 {
+  
+  def main(args:Array[String]):Unit={
+
+	  	    val conf = new SparkConf().setAppName("first").setMaster("local[*]")
+	  	    val sc = new SparkContext(conf)
+	  	    sc.setLogLevel("ERROR")
+	  	    
+	  	    val data = sc.textFile("file:///E:/softwares/Dataengineering/Sqoop/salestable1/part-m*")
+	  	    println("===================RAW RDD====================================")
+	  	    data.take(10).foreach(println)
+	  	    
+   val state = data.filter( x => x.length() >108)
+    println("==========================lenght>100======================")
+    state.foreach(println)
+    val lstate = state.flatMap(x => x.split(","))
+    println("==========================FLATTEN DATA======================")
+    lstate.foreach(println)
+    
+    val lcity = lstate.map(x => x.replace("-",""))
+    println("==========================Replaced DATA WITH-======================")
+    lcity.foreach(println)
+    val llstate = lcity.map(x => x + ",ZEYO")
+    println("========================== ZEYO CONCATED======================")
+    llstate.foreach(println)
+        
+    llstate.coalesce(1).saveAsTextFile("file:///E:/softwares/Dataengineering/Spark/data3")
+     println("==========================TASK COMPLETED======================")
+    
+}
+}
+
+
+===================================================================================================================
+SCHEMA RDD
+===================================================================================================================
+object sparkobj2 {
+
+case class zschema(id:String,product:String,Category:String,mode:String)
+
+def main(args:Array[String]):Unit={
+
+		val conf = new SparkConf().setAppName("first").setMaster("local[*]")
+				val sc = new SparkContext(conf)
+				sc.setLogLevel("ERROR")
+
+				val data = sc.textFile("file:///E:/softwares/Dataengineering/spark/datatxns")
+				println("===================RAW RDD====================================")
+				println
+				data.foreach(println)
+				println
+				val mapsplit = data.map( x => x.split(","))
+				mapsplit.foreach(println)
+				    
+				val srdd = mapsplit.map(x => zschema(x(0),x(1),x(2),x(3)))
+				val filter = srdd.filter( x => x.Category.contains("Gymnastics") )
+				println("===================COLOUMN GYM DATA ====================================")
+				filter.foreach(println)
+				println("==========================TASK COMPLETED======================")
+
+}
+}
+===================================================================================================================
+
+object sparkobj3 {
+
+case class zschema(id:String,product:String,Category:String,mode:String)
+
+def main(args:Array[String]):Unit={
+
+		val conf = new SparkConf().setAppName("first").setMaster("local[*]")
+				val sc = new SparkContext(conf)
+				sc.setLogLevel("ERROR")
+
+				val spark = SparkSession.builder().getOrCreate() // DATA FRAME PROPERTIES
+				import spark.implicits._
+
+				val data =sc.textFile("file:///E:/softwares/Dataengineering/spark/datatxns")
+				println("===================RAW RDD====================================")
+				data.foreach(println)
+
+				val row = data.filter(x => x.contains("Gymnastics"))
+				println("===================ROW DATA====================================")
+				row.foreach(println)   
+
+				val mapsplit = data.map( x => x.split(","))
+
+
+				val srdd = mapsplit.map(x => zschema(x(0),x(1),x(2),x(3)))
+				val filter = srdd.filter( x => x.Category.contains("Gymnastics") && x.id.toInt>14)
+
+
+				println("===================COLOUMN GYM DATA ====================================")
+				filter.foreach(println)
+				println("==========================TASK COMPLETED======================")
+
+				println("=================== DATA FRAME ====================================")
+				println()
+				val df = filter.toDF()
+
+				df.show()
+				df.write.parquet("file:///E:/softwares/Dataengineering/Spark/Parquet")
+				println("=================== TASK COMPLETED ====================================")
+}
+}
+
+
+
+===================================================================================================================
+ROW RDD
+===================================================================================================================
+object sparkobj4 {
+
+
+def main(args:Array[String]):Unit={
+
+		val conf = new SparkConf().setAppName("first").setMaster("local[*]")
+				val sc = new SparkContext(conf)
+				sc.setLogLevel("ERROR")
+
+				val spark = SparkSession.builder().getOrCreate() // DATA FRAME PROPERTIES
+				import spark.implicits._
+
+				val data =sc.textFile("file:///E:/softwares/Dataengineering/spark/datatxns")
+				println("===================RAW RDD====================================")
+				data.foreach(println)
+				
+				val mapsplit = data.map( x => x.split(","))
+        val rowrdd = mapsplit.map( x => Row(x(0),x(1),x(2),x(3)))
+        
+				val filterdata = rowrdd.filter( x => 
+				                                      x(2).toString().contains("Gymnastics") &&
+				                                      x(0).toString().toInt >20)
+				                       				  
+				println("===================ROW DATA====================================")
+			  filterdata.foreach(println)   
+
+			val rowschema = StructType(Array(
+			    StructField("id",StringType),
+			    StructField("category",StringType),
+			    StructField("product",StringType),
+			    StructField("mode",StringType)))
+			    
+			    val df = spark.createDataFrame( filterdata, rowschema)
+			    df.show()
+
+	
+				df.show()
+				df.write.parquet("file:///E:/softwares/Dataengineering/Spark/Parquet1")
+				
+				println("=================== TASK COMPLETED ====================================")
+}
+}
+===================================================================================================================
+DATA FRAME
+===================================================================================================================
+
+object sparkobj6 {
+
+
+def main(args:Array[String]):Unit={
+
+		val conf = new SparkConf().setAppName("first").setMaster("local[*]")
+				val sc = new SparkContext(conf)
+				sc.setLogLevel("ERROR")
+
+				val spark = SparkSession.builder().getOrCreate() // DATA FRAME PROPERTIES
+				import spark.implicits._
+
+				val df = spark.read.format("csv").load("file:///E:/softwares/Dataengineering/spark/datatxns")
+			    df.show()
+			    
+			    df.createOrReplaceTempView("tab")
+			    val finaldf = spark.sql("select * from tab where _c1='Gymnastics'")
+			    finaldf.show()
+
+				
+				
+}
+				
+				
+		
+        
+			
+}
+===================================================================================================================
+object sparkobj6 {
+
+
+def main(args:Array[String]):Unit={
+
+		val conf = new SparkConf().setAppName("first").setMaster("local[*]")
+				val sc = new SparkContext(conf)
+				sc.setLogLevel("ERROR")
+
+				val spark = SparkSession.builder().getOrCreate() // DATA FRAME PROPERTIES
+				import spark.implicits._
+
+				val df = spark.read.format("csv").load("file:///E:/softwares/Dataengineering/spark/datatxns")
+			    df.show()
+			    
+			    df.createOrReplaceTempView("tab")
+			    val finaldf = spark.sql("select * from tab where _c1='Gymnastics'")
+			    finaldf.show()
+
+				finaldf.write.parquet("file:///E:/softwares/Dataengineering/Spark/Parquet2")
+				
+				println("=================== TASK COMPLETED ====================================")
+				
+}
+				
+				
+		
+        
+			
+}
+
+
+===================================================================================================================
+Header
+===================================================================================================================
+object sparkobj7 {
+
+
+def main(args:Array[String]):Unit={
+
+		val conf = new SparkConf().setAppName("first").setMaster("local[*]")
+				val sc = new SparkContext(conf)
+				sc.setLogLevel("ERROR")
+
+				val spark = SparkSession.builder().getOrCreate() // DATA FRAME PROPERTIES
+				import spark.implicits._
+
+				val df = spark
+				               .read
+				               .format("csv")
+				               .option("header","true")
+				               .load("file:///E:/softwares/Dataengineering/spark/datatxns")
+			    df.show()
+			    
+			   
+			    df.createOrReplaceTempView("tab")
+			    val finaldf = spark.sql("select * from tab where Gymnastics1='Jumping'")
+			    finaldf.show()
+
+				/*finaldf.write.parquet("file:///E:/softwares/Dataengineering/Spark/Parquet2")
+				
+				println("=================== TASK COMPLETED ====================================")*/
+				
+}
+===================================================================================================================
+DSL
+
+===================================================================================================================
+object sparkobj8 {
+
+
+	def main(args:Array[String]):Unit={
+
+			val conf = new SparkConf().setAppName("first").setMaster("local[*]")
+					val sc = new SparkContext(conf)
+					sc.setLogLevel("ERROR")
+
+					val spark = SparkSession.builder().getOrCreate() // DATA FRAME PROPERTIES
+					import spark.implicits._
+
+					val df = spark
+					.read
+					.format("csv")
+					.option("header","true")
+					.load("file:///E:/softwares/Dataengineering/spark/datatxns")
+					df.show()
+
+					val finaldf = df.filter("Gymnastics1='Jumping'")
+					
+					
+					
+
+					/*df.createOrReplaceTempView("tab")
+					val finaldf = spark.sql("select * from tab where Gymnastics1='Jumping'")
+					finaldf.show()
+
+					finaldf.write.parquet("file:///E:/softwares/Dataengineering/Spark/Parquet2")
+
+				println("=================== TASK COMPLETED ====================================")*/
+
+	}
+	
+===================================================================================================================
+// delimiter//
+===================================================================================================================
+object sparkobj9 {  // delimiter//
+
+
+	def main(args:Array[String]):Unit={
+
+			val conf = new SparkConf().setAppName("first").setMaster("local[*]")
+					val sc = new SparkContext(conf)
+					sc.setLogLevel("ERROR")
+
+					val spark = SparkSession.builder().getOrCreate() // DATA FRAME PROPERTIES
+					import spark.implicits._
+
+					val df = spark
+					.read
+					.format("csv")
+					.option("header","true")
+					.option("delimiter","#")
+					.load("file:///E:/softwares/Dataengineering/spark/datatxns1")
+					df.show()
+
+					/*val finaldf = df.filter("Gymnastics1='Jumping'")
+					
+					
+					
+
+					df.createOrReplaceTempView("tab")
+					val finaldf = spark.sql("select * from tab where Gymnastics1='Jumping'")
+					finaldf.show()
+
+					finaldf.write.parquet("file:///E:/softwares/Dataengineering/Spark/Parquet2")
+
+				println("=================== TASK COMPLETED ====================================")*/
+
+	}
+}
+===================================================================================================================
+object sparkobj10 { // reading avro file
+
+
+	def main(args:Array[String]):Unit={
+
+			val conf = new SparkConf().setAppName("first").setMaster("local[*]")
+					val sc = new SparkContext(conf)
+					sc.setLogLevel("ERROR")
+
+					val spark = SparkSession.builder().getOrCreate() // DATA FRAME PROPERTIES
+					import spark.implicits._
+
+					val df = spark
+					.read
+					.format("avro")
+					.option("header","true")
+					.option("delimiter","#")
+					.load("file:///E:/softwares/Dataengineering/spark/data.avro")
+					df.show()
+	
+	
+					
+	/*val finaldf = df.filter("Gymnastics1='Jumping'")
+					
+					
+					
+
+					df.createOrReplaceTempView("tab")
+					val finaldf = spark.sql("select * from tab where Gymnastics1='Jumping'")
+					finaldf.show()
+
+					finaldf.write.avro("file:///E:/softwares/Dataengineering/Spark/avro")
+
+				println("=================== TASK COMPLETED ====================================")*/
+
+	}
+}
+===================================================================================================================
+READING TABLE FROM MYSQL
+===================================================================================================================
+
+object sparkobj11 { // reading file from RDBMS
+
+
+	def main(args:Array[String]):Unit={
+
+			val conf = new SparkConf().setAppName("first").setMaster("local[*]")
+					val sc = new SparkContext(conf)
+					sc.setLogLevel("ERROR")
+
+					val spark = SparkSession.builder().getOrCreate() // DATA FRAME PROPERTIES
+					import spark.implicits._
+
+					val sqldf = spark
+					.read
+					.format("jdbc")
+					.option("url","jdbc:mysql://zeyodb.cyewo8l7hsyn.ap-northeast-1.rds.amazonaws.com:3306/itv004875")
+					.option("driver","com.mysql.jdbc.Driver")
+					.option("dbtable","custjob")
+					.option("user","root")
+					.option("password","Aditya908")
+					.load()
+					println()
+					println()
+					println("======================READING  DATA FROM MYSQL==================================")
+					println()					
+					sqldf.show()
+					println()
+					println("======================  END OF TASK ==================================")
+					
+					
+					
+
+
+
+
+	}
+}
+===================================================================================================================
+READING FROM RDBMS AND WRITING TO LOCAL
+===================================================================================================================
+object sparkobj12 { // 
+
+
+	def main(args:Array[String]):Unit={
+
+			val conf = new SparkConf().setAppName("first").setMaster("local[*]")
+					val sc = new SparkContext(conf)
+					sc.setLogLevel("ERROR")
+
+					val spark = SparkSession.builder().getOrCreate() // DATA FRAME PROPERTIES
+					import spark.implicits._
+
+					val sqldf = spark
+					.read
+					.format("jdbc")
+					.option("url","jdbc:mysql://zeyodb.cyewo8l7hsyn.ap-northeast-1.rds.amazonaws.com:3306/itv004875")
+					.option("driver","com.mysql.jdbc.Driver")
+					.option("dbtable","custjob")
+					.option("user","root")
+					.option("password","Aditya908")
+					.load()
+					println()
+					println()
+					println("======================READING  DATA FROM MYSQL==================================")
+					println()					
+					sqldf.show()
+
+					val finaldf = sqldf.filter("location='chennai'")
+					println()
+					finaldf.show()
+
+					finaldf
+					.write
+					.format("CSV")
+					.option("header","true")
+					.save("file:///E:/softwares/Dataengineering/Spark/mysql")
+
+
+
+					println()
+					println("======================  END OF TASK ==================================")
+
+
+
+
+
+
+
+	}
+}
+===================================================================================================================
+READING FROM RDBMS AND WRITING TO RDBMS
+===================================================================================================================
+object sparkobj13 { // reading file from RDBMS and writing to RDBMS
+
+
+	def main(args:Array[String]):Unit={
+
+			val conf = new SparkConf().setAppName("first").setMaster("local[*]")
+					val sc = new SparkContext(conf)
+					sc.setLogLevel("ERROR")
+
+					val spark = SparkSession.builder().getOrCreate() // DATA FRAME PROPERTIES
+					import spark.implicits._
+
+					val sqldf = spark
+					.read
+					.format("jdbc")
+					.option("url","jdbc:mysql://zeyodb.cyewo8l7hsyn.ap-northeast-1.rds.amazonaws.com:3306/itv004875")
+					.option("driver","com.mysql.jdbc.Driver")
+					.option("dbtable","custjob")
+					.option("user","root")
+					.option("password","Aditya908")
+					.load()
+					println()
+					println()
+					println("======================READING  DATA FROM MYSQL==================================")
+					println()					
+					sqldf.show()
+
+					val finaldf = sqldf.filter("location='chennai'")
+					println()
+					finaldf.show()
+
+					finaldf
+					.write
+					.format("jdbc")
+					.option("url","jdbc:mysql://zeyodb.cyewo8l7hsyn.ap-northeast-1.rds.amazonaws.com:3306/itv004875")
+					.option("driver","com.mysql.jdbc.Driver")
+					.option("dbtable","prrrr")
+					.option("user","root")
+					.option("password","Aditya908")					
+					
+					println()
+					println("======================  END OF TASK ==================================")
+
+
+	}
+}
+===================================================================================================================
+import org.apache.spark.SparkContext 
+import org.apache.spark.sql.SparkSession
+import org.apache.spark.SparkConf
+import org.apache.spark.sql.types._
+import org.apache.spark.sql.functions._
+import org.apache.spark.sql._ 
+import org.apache.spark.sql.SaveMode
+===================================================================================================================
+JSON FILE READ
+===================================================================================================================
+
+object sparkobj14 { // reading json file
+
+
+	def main(args:Array[String]):Unit={
+
+			val conf = new SparkConf().setAppName("first").setMaster("local[*]")
+					val sc = new SparkContext(conf)
+					sc.setLogLevel("ERROR")
+
+					val spark = SparkSession.builder().getOrCreate() // DATA FRAME PROPERTIES
+					import spark.implicits._
+
+					val df = spark
+					.read
+					.format("json")
+					.load("file:///E:/softwares/Dataengineering/spark/products.json")
+					println()
+					println()
+					println("======================json DATA==================================")
+					println()
+					df.show()
+					
+					val finaldf = df.filter("age>25")
+					println()
+					println()
+					println("======================PROCESSED DATA==================================")
+					println()
+					finaldf.show()
+					
+					finaldf
+					       .write
+					       .format("CSV")
+					       .mode("append")
+					       .save("file:///E:/softwares/Dataengineering/spark/csv")
+					       println("====================== DATA WRITTEN SUCESSFULLY ==================================")
+					       
+
+
+
+
+
+	}
+}
+===================================================================================================================
+XML READS
+===================================================================================================================
+object sparkobj15 { // reading xml file
+
+
+	def main(args:Array[String]):Unit={
+
+			val conf = new SparkConf().setAppName("first").setMaster("local[*]")
+					val sc = new SparkContext(conf)
+					sc.setLogLevel("ERROR")
+
+					val spark = SparkSession.builder().getOrCreate() // DATA FRAME PROPERTIES
+					import spark.implicits._
+
+					val df = spark
+					.read
+					.format("xml")
+					.option("rowtag","book")
+					.load("file:///E:/softwares/Dataengineering/spark/book.xml")
+					println()
+					println()
+					println("======================XML DATA==================================")
+					println()
+					df.show()
+					
+					
+
+
+
+
+
+	}
+}
+===================================================================================================================
