@@ -272,6 +272,75 @@ ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.avro.AvroSerDe' STORED AS AVRO L
  
 select * from customer_target_tab;    ==== U will not see the data
  
+===============
+Go to Mysql 
+===============
+
+mysql -u nyse_user -h ms.itversity.com -pitversity
+
+use nyse_export;
+
+create table customer_src_itv004875(id int(10),username varchar(100),sub_port varchar(100),
+host varchar(100),date_time varchar(100),hit_count_val_1 varchar(100),hit_count_val_2 varchar(100),
+hit_count_val_3 varchar(100),timezone varchar(100),method varchar(100),`procedure` varchar(100),
+value varchar(100),sub_product varchar(100),web_info varchar(100),status_code varchar(100));
+
+
+insert into customer_src_itv004875 select * From customer_total where id>=301 and id<=330;
+quit
+=============================
+Edge Node
+=============================
+rm -rf /home/itv004875/avsrcdir
+mkdir /home/itv004875/avsrcdir
+cd /home/itv004875/avsrcdir
+echo -n itversity>/home/itv004875/passfile
+
+sqoop import -Dmapreduce.job.user.classpath.first=true
+ --connect jdbc:mysql://ms.itversity.com/nyse_export 
+ --username nyse_user --password-file file:///home/itv004875/passfile -m 1
+ --table customer_src_itv004875 --target-dir /user/itv004875/customer_stage_loc
+ --incremental append --check-column id --last-value 0 --as-avrodatafile
+
+
+hadoop fs -mkdir /user/itv004875/avscdirpro
+hadoop fs -put /home/itv004875/avsrcdir/customer_src_itv004875.avsc /user/itv004875/avscdirpro
+====================================
+Hive shell
+====================================
+
+hive
+SET hive.metastore.warehouse.dir = /user/itv004875/warehouse;
+create database prodb_itv004875;
+use prodb_itv004875;
+
+create  table customer_src   ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.avro.AvroSerDe' STORED AS AVRO LOCATION 
+'/user/itv004875/customer_stage_loc' 
+ TBLPROPERTIES ('avro.schema.url'='/user/itv004875/avscdirpro/customer_src_itv004875.avsc');
+
+select * from customer_src;   === U will see the data
+
+
+create external table customer_target_tab partitioned by 
+(current_day string,year string,month string,day string)
+ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.avro.AvroSerDe' STORED AS AVRO LOCATION
+'/user/itv004875/customer_target_tab' 
+TBLPROPERTIES ('avro.schema.url'='/user/itv004875/avscdirpro/customer_src_itv004875.avsc');
+
+select * from customer_target_tab;    ==== U will not see the data
+
+set hive.exec.max.dynamic.partitions=1000;
+set hive.exec.dynamic.partition.mode=nonstrict;
+insert into prodb_itv004875.customer_target_tab partition
+(current_day,year,month,day) select id, username,
+sub_port,host,date_time,hit_count_val_1,hit_count_val_2,hit_count_val_3,timezone,method,'dummy' 
+as proc,value,sub_product,
+web_info,status_code,current_date,year(from_unixtime(unix_timestamp(date_time,'dd/MMM/yyyy:HH:mm:ss Z'),
+'yyyy-MM-dd')) , MONTH(from_unixtime(unix_timestamp(date_time,'dd/MMM/yyyy:HH:mm:ss Z'),'yyyy-MM-dd')) , 
+DAY(from_unixtime(unix_timestamp(date_time,'dd/MMM/yyyy:HH:mm:ss Z'),'yyyy-MM-dd'))from customer_src where 
+not(upper(web_info) like'%JAKARTA%');
+
+!hadoop fs -ls /user/itv004875>/customer_target_tab;
 
  
 
