@@ -360,3 +360,46 @@ select max(population) as maximum from country
 union
 select min(population) as maximum from country;
 ====================================================================================================================================================
+6.FIND THE USER IDS which are having more ougoing messages for feb month compared to jan month
+
+by using the below table
+
+create table mobile(userid int,mobileno bigint,msgtype varchar(20),MDate date);
+ALTER TABLE table_name MODIFY column_name INT;
+insert into mobile values(12345,9988445566,'outgoing','23-01-22');
+insert into mobile values(67890,8899445566,'incoming','01-02-22');
+insert into mobile values(78915,7799884455,'outgoing','23-01-22');
+insert into mobile values(12345,669811224,'outgoing','02-02-22');
+insert into mobile values(12345,5598445566,'incoming','24-01-22');
+insert into mobile values(12345,1199885544,'outgoing','05-02-22');
+
+select * from mobile;
+
+userid	  Mobileno	 msgtype	Date
+12345	9988445566	outgoing	2023-01-22
+67890	8899445566	incoming	2001-02-22
+78915	7799884455	outgoing	2023-01-22
+12345	669811224	outgoing	2002-02-22
+12345	5598445566	incoming	2024-01-22
+12345	1199885544	outgoing	2005-02-22
+
+select * from
+(
+select userid,mon_data,(out_num-diff) as diff1 
+from
+(
+select userid,mon_data,out_num,
+lead(out_num) over (partition by msgtype) as diff
+from
+(
+select userid,msgtype,mon_data,count(*) as out_num
+from
+(select *,date_format(str_to_date(MDate,'%Y-%m-%d'),'%m')
+as mon_data from mobile) a
+where msgtype = 'outgoing'
+group by userid,msgtype,mon_data
+order by userid,mon_data
+)b
+)c
+)d 
+where (diff1 <> 0 or diff1 is not null);
