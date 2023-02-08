@@ -1,0 +1,12 @@
+-------------------
+pingtest code
+-------------------
+-
+  name: Test connectivity to target servers
+  hosts: inventory.txt
+  tasks: 
+    - name: ping test
+      ping:
+      
+      
+-----------------------------------------------------      
