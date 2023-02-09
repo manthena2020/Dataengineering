@@ -212,6 +212,21 @@ echo "`df -hP | grep '^/dev/' | awk '{ total += $2 } END { print "Total Size: " 
 echo "File System    Total Size    Used Size    Available Size"
 df -h | grep '^/dev/' | awk '{print $1 "\t\t" $2 "\t\t" $3 "\t\t" $4}'
 ------------------------------------------------------------------------------------------------------------------------
+file list 
+______________________________________________________________________________
+#!/bin/bash
 
+echo "-------------Files less than 10 MB-----------------------------------------------------------:"
+find . -type f -size -10M -exec ls -lh {} \; | awk '{ print $5 ": " $9 }'
+
+echo "------------------------Files between 11 MB and 64 MB----------------------------------------:"
+find . -type f -size +10M -a -size -64M -exec ls -lh {} \; | awk '{ print $5 ": " $9 }'
+
+echo "------------------------Files between 65 MB and 128 MB---------------------------------------:"
+find . -type f -size +64M -a -size -128M -exec ls -lh {} \; | awk '{ print $5 ": " $9 }'
+
+echo "------------------------Files greater than 128 MB--------------------------------------------:"
+find . -type f -size +128M -exec ls -lh {} \; | awk '{ print $5 ": " $9 }'
+____________________________________________________________________________________________________
 
 
