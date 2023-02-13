@@ -54,14 +54,15 @@ insert into persons (persons,fruit) values('p1','apple'),('p1','banana'),('p1','
 
 RESULT
 
-persons  fruit
-p1     	apple
-p1	    banana
-p1		mango
-p3		banana
-p3		apple
-p2		apple
-p2		mango
+persons 	 fruit
+
+p1     		 apple
+p1	   		 banana
+p1			 mango
+p3			 banana
+p3			 apple
+p2			 apple
+p2			 mango
 
 
 we have identify person have only two fruits bannan and apple.
