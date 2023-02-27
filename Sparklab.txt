@@ -1131,3 +1131,89 @@ object sparkobj15 { // reading xml file
 	}
 }
 ===================================================================================================================
+object sparkobj2  { /* displaying zero first */
+	def main(args: Array[String]): Unit = {
+
+			val input = List(1,0,0,0,1,1)
+					val zerofirst = input.partition(_== 0)
+					val output = zerofirst._1 ::: zerofirst._2
+
+					output.foreach(println)
+
+
+	}
+}
+/*The given code is a Scala program that defines an object named "sparkobj2".
+The object has a single method named "main" that takes an array of Strings 
+as an input parameter. 
+The main method defines a List named "input"
+containing six integers, 
+and then performs a partition operation
+on the list based on the value of each element (0 or 1).
+
+
+The partition method returns a tuple containing two lists: 
+
+the first list contains all the elements that satisfy the given predicate
+(in this case, the value is 0),
+ and the second list contains all the elements that do not satisfy the given predicate (in this case, the value 
+    is 1).
+
+The program then concatenates these two lists using the ":::" operator
+to create a new list named "output". 
+Finally, the program uses a foreach loop to print each element of the 
+"output" list.
+ */
+
+object sparkobj3  { /* displaying zero first */
+	def main(args: Array[String]): Unit = {
+
+			val input = List(1, 0, 0, 0, 1, 1)
+					val zeros = input.filter(_ == 0)
+					val nonZeros = input.filter(_ != 0)
+					val output = zeros ++ nonZeros
+					output.foreach(println)
+
+	}===================================================================================================================
+}
+
+
+
+object sparkobj4 {// to find out email doesnt have @ string 
+
+
+	def main(args:Array[String]):Unit={
+
+			val conf = new SparkConf().setAppName("first").setMaster("local[*]")
+					val sc = new SparkContext(conf)
+					sc.setLogLevel("ERROR")
+
+					val spark = SparkSession.builder().getOrCreate() // DATA FRAME PROPERTIES
+					import spark.implicits._
+					val df = spark
+					.read
+					.format("csv")
+					.option("header", "false")
+					.option("delimiter", ",")
+					.load("file:///c:/data/email.txt")
+					.toDF("sno", "name", "email","phone no")
+
+					println("-----------------DATA--------------")
+					df.show()
+
+					/*val filteredDF = df.filter(!$"email".contains("@"))
+					println("----------------- DATA MISSIN @ --------------")
+					filteredDF.show()
+					 */
+					val filteredDF = df.filter(length(trim(col("phone no").cast(StringType))) < 10)
+
+					
+					println("----------------- DATA MISSIN @ --------------")
+					filteredDF.show()
+
+
+
+
+	}
+}
+===================================================================================================================
