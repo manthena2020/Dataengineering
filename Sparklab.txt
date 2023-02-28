@@ -1217,3 +1217,56 @@ object sparkobj4 {// to find out email doesnt have @ string
 	}
 }
 ===================================================================================================================
+object sparkobj5 {
+
+	def main(args:Array[String]):Unit={
+
+			val conf = new SparkConf().setAppName("first").setMaster("local[*]")
+					val sc = new SparkContext(conf)
+					sc.setLogLevel("ERROR")
+
+					val spark = SparkSession.builder().getOrCreate() // DATA FRAME PROPERTIES
+					import spark.implicits._
+
+/*val table1 = Seq(1, 2, 3).toDF("id").withColumn("dummy",monotonicallyIncreasingId()+1)
+val table2 = Seq("A", "B").toDF("name").withColumn("dummy",monotonicallyIncreasingId())
+                                                 
+table1.show()
+table2.show()*/
+					
+					val table1 = Seq(1, 2, 3).toDF("id").withColumn("dummy",monotonicallyIncreasingId()+1)
+		
+					val table2 = Seq("A", "B").toDF("name")
+					
+					val numRows = table2.count()
+					/*val reversedIds = (monotonicallyIncreasingId()* -1 + numRows + 1)*/ // Decrease 
+					val reversedIds = (monotonicallyIncreasingId()+1)
+					val dfWithIds = table2.withColumn("dummy", reversedIds)
+
+					table1.show()			
+					dfWithIds.show()
+
+					
+
+					val joinedDF = table1.join(dfWithIds, Seq("dummy"), "left_outer").drop("dummy")
+					/*.select("id","name")
+					.orderBy("id")
+*/
+					joinedDF.show()
+
+
+
+/*
+val joinedDF = table1.join(table2, Seq("dummy"), "left_outer").drop("dummy")
+.select("id","name")
+.orderBy("id")
+
+joinedDF.show()*/
+
+/*For example, if the DataFrame has 3 rows, then numRows will be 3. 
+The expression monotonicallyIncreasingId() * -1 will generate IDs [-1, -2, -3].
+Adding numRows + 1 to these IDs will result in [3, 2, 1], which is the desired range
+of IDs for a monotonically decreasing sequence.*/
+	}
+}
+===================================================================================================================
