@@ -1270,3 +1270,73 @@ of IDs for a monotonically decreasing sequence.*/
 	}
 }
 ===================================================================================================================
+object sparkobj6 {
+
+	def main(args:Array[String]):Unit={
+
+			val conf = new SparkConf().setAppName("first").setMaster("local[*]")
+					val sc = new SparkContext(conf)
+					sc.setLogLevel("ERROR")
+
+					val spark = SparkSession.builder().getOrCreate() // DATA FRAME PROPERTIES
+					import spark.implicits._
+
+import org.apache.spark.sql.functions
+
+// create a sample DataFrame
+val data = Seq(
+  (101, "John", 50000),
+  (101, "Mary", 60000),
+  (102, "Bob", 70000),
+  (102, "Alice", 80000),
+  (103, "Joe", 90000),
+  (103, "Sara", 100000)
+)
+val df = data.toDF("deptid", "name", "salary")
+
+// group by deptid, find the maximum salary for each group, select deptid and max_salary columns,
+// order by deptid, keep only the top 2 groups with highest max_salary, order by deptid and max_salary in descending order,
+// drop the max_salary column
+
+df.show()
+
+val resultDF = df.groupBy("deptid") // maximum salary from each department
+                  .agg(functions.max("salary").as("Maximium salary-Department wise"))
+                   .orderBy("deptid")
+                  
+                 /* .orderBy(functions.desc("Maximium salary-Department wise"))*/ // from decending 
+
+/*df.groupBy("deptid"): This groups the DataFrame df by the deptid column. 
+ This means that rows with the same deptid value are grouped together.
+
+.agg(functions.max("salary").as("max_salary")): 
+This calculates the maximum value of the salary column for each group of rows with
+ the same deptid value. 
+ The resulting DataFrame will have two columns: deptid and max_salary. 
+ The as method renames the max(salary) column to max_salary.
+
+.orderBy(functions.desc("max_salary")): 
+This orders the resulting DataFrame by the max_salary column in descending order. 
+This means that the departments with the highest maximum salaries will appear
+ first in the DataFrame.
+
+So the final result of this code will be a DataFrame that shows the maximum salary for each department,
+ ordered from highest to lowest maximum salary.
+
+
+*/
+
+
+
+/*val resultDF = df.groupBy("deptid") // lowest salary from each department
+                  .agg(functions.min("salary").as("Minimum salary-Department wise"))
+                  .orderBy("deptid")
+*/
+
+
+// show the resulting DataFrame
+resultDF.show()
+
+	}
+}
+===================================================================================================================
