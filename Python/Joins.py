@@ -1,0 +1,18 @@
+import pandas as pd
+table1 = pd.DataFrame('zeyo')
+table2 = pd.DataFrame("Analytics")
+print('')
+print('')
+print("----------------TABLE 1--------------------")
+print('')
+print('')
+print(table1)
+print("----------------TABLE 2--------------------")
+print('')
+print('')
+print(table2)
+print("-------------TABLE 1 & TABLE 2 JOIN--------------")
+print('')
+print('')
+df = table1 + table2
+print(df)
