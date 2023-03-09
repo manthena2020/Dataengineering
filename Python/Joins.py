@@ -1,6 +1,6 @@
 import pandas as pd
-table1 = pd.DataFrame('zeyo')
-table2 = pd.DataFrame("Analytics")
+table1 = pd.DataFrame({"ID": [1, 2, 3]})
+table2 = pd.DataFrame({"NAME": ["A", "B"]})
 print('')
 print('')
 print("----------------TABLE 1--------------------")
@@ -14,5 +14,5 @@ print(table2)
 print("-------------TABLE 1 & TABLE 2 JOIN--------------")
 print('')
 print('')
-df = table1 + table2
+df = table1.join(table2)
 print(df)

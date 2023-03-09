@@ -1,18 +1,15 @@
-import pandas as pd
-table1 = pd.DataFrame({"ID": [1, 2, 3]})
-table2 = pd.DataFrame({"NAME": ["A", "B"]})
+
+S1 = "Zeyo"
+S2 = " + Analytics"
 print('')
 print('')
-print("----------------TABLE 1--------------------")
+print('')
+print(S1)
 print('')
 print('')
-print(table1)
-print("----------------TABLE 2--------------------")
+print(S2)
+print("-------------CONCAT--------------")
 print('')
 print('')
-print(table2)
-print("-------------TABLE 1 & TABLE 2 JOIN--------------")
-print('')
-print('')
-df = table1.join(table2)
+df = S1+S2
 print(df)
