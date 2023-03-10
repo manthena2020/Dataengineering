@@ -1,0 +1,40 @@
+print("Hello " + input("What is your name?"))
+---------------------------------------------------------------------------------------------------------
+
+# 🚨 Don't change the code below 👇
+a = input("a: ")
+b = input("b: ")
+# 🚨 Don't change the code above 👆
+
+####################################
+#Write your code below this line 👇
+
+a, b = b, a     (or)
+
+c=a
+a=b
+b=c
+
+#Write your code above this line 👆
+####################################
+
+# 🚨 Don't change the code below 👇
+print("a: " + a)
+print("b: " + b)
+---------------------------------------------------------------------------------------------------------
+a = input("a: ")
+b = input("b: ")
+c = 2
+print("c:", c)
+print("----------------------")
+a = int(a) + c
+b = int(b) - c
+print(a)
+print(b)
+print("----------------------")
+---------------------------------------------------------------------------------------------------------
+print("welcome to Band Name Generator")
+city = input("what's the name of the city u grew up  : \n")
+pet = input("what is the name of your pet?:\n")
+print("your band name could be:" + city + " " + pet)
+---------------------------------------------------------------------------------------------------------
