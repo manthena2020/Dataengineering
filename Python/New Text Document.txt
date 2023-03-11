@@ -111,3 +111,287 @@ month= 12 * y
 print(f"You have {day} days, {week} weeks, and {month} months left")
 
 ---------------------------------------------------------------------------------------------------------
+#If the bill was $150.00, split between 5 people, with 12% tip. 
+
+#Each person should pay (150.00 / 5) * 1.12 = 33.6
+#Format the result to 2 decimal places = 33.60
+
+#Tip: There are 2 ways to round a number. You might have to do some Googling to solve this.💪
+
+#Write your code below this line 👇
+
+print("Welcome to the Tip Calculator.")
+bill = float(input("what was the total bill? "))
+tip = int(input(" what percentage tip would you like to give? 10,12 or 15?"))
+ftip = (tip/100)*bill
+print(bill)
+print(tip)
+split = int(input("how many people to split the bill?"))
+cal = (bill+ftip)/split
+final = round(cal,2)   Or "{:.2f}".format(variable name)
+print("Each person should pay:",final)
+---------------------------------------------------------------------------------------------------------
+print("Welcome to the rollercoaster!")
+height = int(input("What is your height in cm? "))
+if height > 120:
+  print("you can ride")
+else:
+  print(" you need to grow")
+---------------------------------------------------------------------------------------------------------
+# 🚨 Don't change the code below 👇
+number = int(input("Which number do you want to check? "))
+# 🚨 Don't change the code above 👆
+
+#Write your code below this line 👇
+
+x = int(number)
+
+if x % 2 == 0:
+    print("This is an even number.")
+else:
+    print("This is an odd number.")
+	
+---------------------------------------------------------------------------------------------------------
+# 🚨 Don't change the code below 👇
+height = float(input("enter your height in m: "))
+weight = float(input("enter your weight in kg: "))
+# 🚨 Don't change the code above 👆
+
+#Write your code below this line 👇
+h = height ** 2
+bmi = round(weight/h)
+
+if bmi < 18.5:
+     print(f" your BMI is {bmi}, you are underweight.")
+elif bmi < 25:
+     print(f" your BMI is {bmi}, you have a normal weight.")
+elif bmi < 30:
+     print(f" your BMI is {bmi}, you are slightly overweight.")
+elif bmi < 35:
+     print(f" your BMI is {bmi}, you are obese.")
+else:
+     print(f" your BMI is {bmi}, you are clinically obese.")
+
+---------------------------------------------------------------------------------------------------------
+This is how you work out whether if a particular year is a leap year.
+
+on every year that is evenly divisible by 4 
+
+**except** every year that is evenly divisible by 100 
+
+**unless** the year is also evenly divisible by 400
+
+e.g. The year 2000:
+
+2000 ÷ 4 = 500 (Leap)            yes
+                                          leap year
+2000 ÷ 100 = 20 (Not Leap)       no 
+
+2000 ÷ 400 = 5 (Leap!)
+
+So the year 2000 is a leap year.
+
+But the year 2100 is not a leap year because:
+
+2100 ÷ 4 = 525 (Leap)
+
+2100 ÷ 100 = 21 (Not Leap)
+
+2100 ÷ 400 = 5.25 (Not Leap)
+
+The condition (year % 4 == 0 and year % 100 != 0) or year % 400 == 0 
+checks if the year is divisible by 4 and not divisible by 100, 
+or if it's divisible by 400. This covers all cases of leap years except
+ for years that are divisible by 100 but not divisible by 400.
+ These years are not leap years, so they need to be excluded from the leap year calculation.
+
+For example, the year 2000 is a leap year because it's divisible by both 4 and 400.
+ However, the year 1900 is not a leap year because it's divisible by 100 but not divisible by 400.
+
+# 🚨 Don't change the code below 👇
+year = int(input("Which year do you want to check? "))
+# 🚨 Don't change the code above 👆
+
+#Write your code below this line 👇
+
+if (year % 4 == 0 and year % 100 !=0 ) or year % 4 ==0:
+    print("Leap year.")
+else:
+    print("Not leap year.")
+	
+	
+	Leap year formula:
+	
+	if it is cleanly divisible by 4 and not cleanly divisible by 100 then leap year
+    if it is cleanly divisible by 4 and cleanly divisible by 100 and cleanly divisible by 400 then leap year 
+	if it is  not cleanly divisible by 4 and  cleanly divisible by 100 and not cleanly divisible by 400 then not leap year
+	
+	if year % 4 == 0
+  if year % 100 ==0 ) 
+      if year % 4 ==0:
+        print("Leap year.")
+      else:
+        print("not leap year")
+   else:
+       print("leap year")
+else:
+    print("Not leap year.")
+
+	
+	
+---------------------------------------------------------------------------------------------------------
+print("Welcome to the rollercoaster!")
+height = int(input("What is your height in cm? "))
+bill = 0
+
+if height >= 120:
+  print("You can ride the rollercoaster!")
+  age = int(input("What is your age? "))
+  if age < 12:
+    bill = 5
+    print("Child tickets are $5.")
+  elif age <= 18:
+    bill = 7
+    print("Youth tickets are $7.")
+  else:
+    bill = 12
+    print("Adult tickets are $12.")
+  
+  wants_photo = input("Do you want a photo taken? Y or N. ")
+  if wants_photo == "Y":
+    bill += 3
+  
+  print(f"Your final bill is ${bill}")
+
+else:
+  print("Sorry, you have to grow taller before you can ride.")
+---------------------------------------------------------------------------------------------------------
+	
+# 🚨 Don't change the code below 👇
+print("Welcome to Python Pizza Deliveries!")
+size = input("What size pizza do you want? S, M, or L ")
+add_pepperoni = input("Do you want pepperoni? Y or N ")
+extra_cheese = input("Do you want extra cheese? Y or N ")
+# 🚨 Don't change the code above 👆
+
+#Write your code below this line 👇
+
+if size == "S":
+    bill = 15
+elif size == "M":
+    bill = 20
+else:
+    bill = 25
+
+if add_pepperoni == "Y":
+    if size == "S":
+       bill += 2
+    else:
+       bill +=3
+if extra_cheese == "Y":
+    bill += 1
+else:
+    bill += 0
+
+print(f"Your final bill is: ${bill}.")
+
+---------------------------------------------------------------------------------------------------------	   
+	print("Welcome to the rollercoaster!")
+height = int(input("What is your height in cm? "))
+bill = 0
+
+if height >= 120:
+  print("You can ride the rollercoaster!")
+  age = int(input("What is your age? "))
+  if age < 12:
+    bill = 5
+    print("Child tickets are $5.")
+  elif age <= 18:
+    bill = 7
+    print("Youth tickets are $7.")
+  elif age >= 45 and age <= 55:
+    print("Everything is going to be ok. Have a free ride on us!")
+  else:
+    bill = 12
+    print("Adult tickets are $12.")
+  
+  wants_photo = input("Do you want a photo taken? Y or N. ")
+  if wants_photo == "Y":
+    bill += 3
+  
+  print(f"Your final bill is ${bill}")
+
+else:
+  print("Sorry, you have to grow taller before you can ride.")
+
+---------------------------------------------------------------------------------------------------------	
+# 🚨 Don't change the code below 👇
+print("Welcome to the Love Calculator!")
+name1 = input("What is your name? \n")
+name2 = input("What is their name? \n")
+# 🚨 Don't change the code above 👆
+
+#Write your code below this line 👇
+x = name1 + name2
+l = x.lower()  # converting the string to lower
+t = l.count("t")
+r = l.count("r")
+u = l.count("u")
+e = l.count("e")
+true = t+r+u+e
+p = l.count("l")
+o = l.count("o")
+v = l.count("v")
+e = l.count("e")
+love = p+o+v+e
+z = str(true)+str(love)
+
+print(f"Your score is {z}.")
+---------------------------------------------------------------------------------------------------------
+print('''
+*******************************************************************************
+          |                   |                  |                     |
+ _________|________________.=""_;=.______________|_____________________|_______
+|                   |  ,-"_,=""     `"=.|                  |
+|___________________|__"=._o`"-._        `"=.______________|___________________
+          |                `"=._o`"=._      _`"=._                     |
+ _________|_____________________:=._o "=._."_.-="'"=.__________________|_______
+|                   |    __.--" , ; `"=._o." ,-"""-._ ".   |
+|___________________|_._"  ,. .` ` `` ,  `"-._"-._   ". '__|___________________
+          |           |o`"=._` , "` `; .". ,  "-._"-._; ;              |
+ _________|___________| ;`-.o`"=._; ." ` '`."\` . "-._ /_______________|_______
+|                   | |o;    `"-.o`"=._``  '` " ,__.--o;   |
+|___________________|_| ;     (#) `-.o `"=.`_.--"_o.-; ;___|___________________
+____/______/______/___|o;._    "      `".o|o_.--"    ;o;____/______/______/____
+/______/______/______/_"=._o--._        ; | ;        ; ;/______/______/______/_
+____/______/______/______/__"=._o--._   ;o|o;     _._;o;____/______/______/____
+/______/______/______/______/____"=._o._; | ;_.--"o.--"_/______/______/______/_
+____/______/______/______/______/_____"=.o|o_.--""___/______/______/______/____
+/______/______/______/______/______/______/______/______/______/______/_____ /
+*******************************************************************************
+''')
+
+print("Welcome to Treasure Island.")
+print("Your mission is to find the treasure.")
+
+c1 = input('You\'re at a crossroad. Where do you want to go? Type "left" or "right". ').lower()
+
+if c1 == "left":
+    c2 = input('You\'ve come to a lake. There is an island in the middle of the lake. Type "wait" to wait for a boat. Type "swim" to swim across.\n').lower()
+    
+    if c2 == "wait":
+        c3 = input("You arrive at the island unharmed. There is a house with 3 doors. One red, one yellow, and one blue. Which color do you choose? ").lower()
+        
+        if c3 == "red":
+            print("It's a room full of fire. Game Over.")
+        elif c3 == "yellow":
+            print("You found the treasure! You win!")
+        elif c3 == "blue":
+            print("You enter a room of beasts. Game Over.")
+        else:
+            print("You choose a door that doesn't exist. Game Over.")
+    else:
+        print("You got attacked by an angry trout. Game Over.")
+    
+else:
+    print("You fell into a hole. Game Over.")
